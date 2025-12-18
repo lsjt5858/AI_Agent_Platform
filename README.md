@@ -16,7 +16,7 @@
 ## 📅 学习进度
 
 ### 总体进度
-- [x] Week 1: FastAPI基础概念与路由 (进行中 - 20%)
+- [x] Week 1: FastAPI基础概念与路由 (进行中 - 30%)
   - [x] Day 1: Hello World 与路径参数
   - [ ] Day 2: 请求方法与查询参数
   - [ ] Day 3: 请求体与Pydantic模型
@@ -30,9 +30,11 @@
 
 ### 当前学习内容
 正在学习 **Week 1 - Day 1**：FastAPI基础概念
-- ✅ 已完成：创建第一个FastAPI应用
-- ✅ 已完成：理解路径参数
-- 📍 位置：[`week1/day1.py`](./week1/day12-18.py)
+- ✅ Day 1 已完成：创建FastAPI应用、路径参数、HTTP方法、Pydantic模型
+- 📍 位置：[`week1_qwen/day1/`](week1_qwen/day1/)
+  - [`day12-18.py`](week1_qwen/day1/day12-18.py) - 基础示例
+  - [`day12-18 Pydantic_model.py`](week1_qwen/day1/day12-18%20Pydantic_model.py) - Pydantic模型
+  - [`day12-18_练习.py`](week1_qwen/day1/day12-18_%E7%BB%83%E4%B9%A0.py) - 图书管理API练习
 - 📝 学习笔记：[`day1-notes.md`](./docs/week1/day1-notes.md)
 
 ## 🛤️ 学习路线图
@@ -174,6 +176,12 @@ FastAPI/
 ├─ week1/                    # 第一周学习内容
 │  ├─ __init__.py
 │  └─ day1.py               # Day 1: Hello World
+├─ week1_qwen/               # 第一周实际学习代码
+│  ├─ __init__.py
+│  ├─ day1/                 # Day 1 代码
+│  │  ├─ day12-18.py
+│  │  └─ day12-18_练习.py
+│  └─ day2.py               # Day 2: 请求方法与查询参数
 ├─ .venv/                    # 虚拟环境
 ├─ nut_venv/                # 另一个虚拟环境
 └─ .idea/                   # PyCharm配置
@@ -214,7 +222,7 @@ FastAPI/
 ### Week 1: FastAPI基础
 
 #### Day 1 - Hello World与路径参数 ✅
-**文件**: [`week1/day1.py`](./week1/day12-18.py)
+**文件**: [`week1_qwen/day1/`](week1_qwen/day1/)
 **目标**:
 - 创建第一个FastAPI应用
 - 理解路径参数的使用
@@ -222,20 +230,22 @@ FastAPI/
 
 **完成内容**:
 - ✅ FastAPI应用创建
-- ✅ 路由定义 (`@app.get`)
+- ✅ 路由定义 (`@app.get`, `@app.post`, `@app.put`)
 - ✅ 路径参数使用
 - ✅ 异步函数基础
+- ✅ Pydantic模型入门
+- ✅ 响应格式控制（HTML、JSON、重定向）
+- ✅ 图书管理API练习
 
 #### Day 2 - 请求方法与查询参数
 **目标**:
-- 掌握GET、POST、PUT、DELETE等HTTP方法
-- 学习查询参数的使用
-- 理解可选参数和默认值
+- 深入学习查询参数的使用
+- 参数验证与限制
+- 混合参数（路径+查询）
+- 待完成...
 
-**待完成**:
-- [ ] 实现多种HTTP方法
-- [ ] 添加查询参数示例
-- [ ] 创建带参数验证的API
+**学习文件**:
+- 待创建：[`week1_qwen/day2.py`](week1_qwen/day2.py)
 
 #### Day 3 - 请求体与Pydantic模型
 **目标**:

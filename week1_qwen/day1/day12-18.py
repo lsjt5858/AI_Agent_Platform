@@ -11,10 +11,15 @@ app = FastAPI()  # 创建实例
 
 # 用全局字典临时存储item（实际项目用数据库）
 items_db = {}
-# ============================================================================
+# ===========================请求方法=================================================
 @app.get("/items")
 async def root():
     return {"message": "Hello World!"}
+
+
+@app.get("/items/{item_id}")
+async def read_item(item_id: int):
+    return {"item_id": item_id}
 
 
 @app.post("/items/")
@@ -23,12 +28,15 @@ async def create_item(item: dict):
     if item_id:
         items_db[item_id] = item
         return {"message": "创建成功以下是创建的数据", "item": item}
-    return {"message": "缺少item_id"}
+    return {f"message": "缺少{item_id}"}
 
-
-@app.get("/items/{item_id}")
-async def read_item(item_id: int):
-    return {"item_id": item_id}
+@app.put("/items/{item_id}")
+async def update_item(item: dict, item_id: int):
+    item_id = item.get("item_id")
+    if item_id:
+        items_db[item_id] = item
+        return {"message": "创建修改以下是创建的数据", "item": item}
+    return item
 
 
 #  @app.get(...) 路径操作装饰器   定义请求方法和路径

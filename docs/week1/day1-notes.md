@@ -151,10 +151,10 @@ if __name__ == "__main__":
 ### 常用命令
 ```bash
 # 启动开发服务器（热重载）
-uvicorn week1.day1:app --reload
+uvicorn week1_qwen.day1:app --reload
 
 # 启动服务器（指定端口）
-uvicorn week1.day1:app --port 8001
+uvicorn week1_qwen.day1:app --port 8001
 
 # 查看API文档
 # 浏览器访问：http://127.0.0.1:8000/docs
@@ -178,4 +178,4 @@ uvicorn week1.day1:app --port 8001
 - 总结：FastAPI入门比想象中简单，类型提示是核心特性
 
 ## 🏆 代码文件
-- [`/week1/day1.py`](../../week1/day12-18.py) - 今日完成的代码
+- [`/week1/day1.py`](../../week1_qwen/day12-18.py) - 今日完成的代码
