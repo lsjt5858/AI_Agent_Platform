@@ -16,8 +16,10 @@ import pytest_asyncio
 from httpx import ASGITransport, AsyncClient
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 
-from project.app.database import Base, get_db
-from project.app.main import app
+from app.database import Base, get_db
+from app.main import app
+# Import models to ensure they are registered with Base.metadata
+from app.models import Agent, Conversation, Message
 
 
 @pytest.fixture(scope="session")
@@ -131,7 +133,7 @@ async def db_with_agent(test_session):
     Useful for tests that need an existing agent to work with.
     Returns tuple of (session, agent).
     """
-    from project.app.models.agent import Agent
+    from app.models.agent import Agent
     
     agent = Agent(
         name="Test Agent",
@@ -153,7 +155,7 @@ async def db_with_conversation(db_with_agent):
     Useful for tests that need an existing conversation to work with.
     Returns tuple of (session, agent, conversation).
     """
-    from project.app.models.conversation import Conversation
+    from app.models.conversation import Conversation
     
     session, agent = db_with_agent
     
@@ -176,7 +178,7 @@ async def db_with_messages(db_with_conversation):
     Useful for tests that need existing messages to work with.
     Returns tuple of (session, agent, conversation, messages).
     """
-    from project.app.models.message import Message
+    from app.models.message import Message
     
     session, agent, conversation = db_with_conversation
     

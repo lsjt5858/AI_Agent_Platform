@@ -9,10 +9,10 @@ from typing import TYPE_CHECKING
 from sqlalchemy import DateTime, ForeignKey, String, Text, func
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from project.app.database import Base
+from ..database import Base
 
 if TYPE_CHECKING:
-    from project.app.models.conversation import Conversation
+    from .conversation import Conversation
 
 
 class Message(Base):

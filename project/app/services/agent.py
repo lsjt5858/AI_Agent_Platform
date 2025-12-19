@@ -9,9 +9,9 @@ from typing import List, Optional
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from project.app.models.agent import Agent
-from project.app.repositories.agent import AgentRepository
-from project.app.schemas.agent import AgentCreate, AgentUpdate
+from ..models.agent import Agent
+from ..repositories.agent import AgentRepository
+from ..schemas.agent import AgentCreate, AgentUpdate
 
 
 class AgentNotFoundError(Exception):

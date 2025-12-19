@@ -4,14 +4,14 @@ Pydantic Schemas Package.
 Exports all schemas for API data validation and serialization.
 """
 
-from project.app.schemas.agent import AgentCreate, AgentResponse, AgentUpdate
-from project.app.schemas.conversation import (
+from .agent import AgentCreate, AgentResponse, AgentUpdate
+from .conversation import (
     ConversationCreate,
     ConversationDetail,
     ConversationResponse,
 )
-from project.app.schemas.message import MessageCreate, MessageResponse
-from project.app.schemas.response import APIResponse, ErrorDetail
+from .message import MessageCreate, MessageResponse
+from .response import APIResponse, ErrorDetail
 
 __all__ = [
     # Agent schemas

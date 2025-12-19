@@ -1,6 +1,6 @@
 # Business Services Package
 
-from project.app.services.llm import (
+from .llm import (
     LLMService,
     LLMError,
     LLMTimeoutError,
@@ -9,18 +9,18 @@ from project.app.services.llm import (
     parse_llm_response,
     get_llm_service,
 )
-from project.app.services.agent import (
+from .agent import (
     AgentService,
     AgentNotFoundError,
     get_agent_service,
 )
-from project.app.services.conversation import (
+from .conversation import (
     ConversationService,
     ConversationNotFoundError,
     AgentNotFoundError as ConversationAgentNotFoundError,
     get_conversation_service,
 )
-from project.app.services.message import (
+from .message import (
     MessageService,
     ConversationNotFoundError as MessageConversationNotFoundError,
     get_message_service,

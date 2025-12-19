@@ -8,7 +8,7 @@ from typing import List
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from project.app.models.message import Message
+from ..models.message import Message
 
 
 class MessageRepository:

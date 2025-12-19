@@ -9,11 +9,11 @@ from typing import List
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from project.app.models.message import Message
-from project.app.repositories.agent import AgentRepository
-from project.app.repositories.conversation import ConversationRepository
-from project.app.repositories.message import MessageRepository
-from project.app.services.llm import LLMService, get_llm_service
+from ..models.message import Message
+from ..repositories.agent import AgentRepository
+from ..repositories.conversation import ConversationRepository
+from ..repositories.message import MessageRepository
+from .llm import LLMService, get_llm_service
 
 
 class ConversationNotFoundError(Exception):

@@ -174,5 +174,5 @@
     - 测试错误场景
     - _Requirements: 5.4, 5.5_
 
-- [ ] 12. Final Checkpoint - 确保所有测试通过
+- [x] 12. Final Checkpoint - 确保所有测试通过
   - Ensure all tests pass, ask the user if questions arise.

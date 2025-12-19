@@ -8,9 +8,9 @@ from typing import List, Optional
 from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from project.app.models.conversation import Conversation
-from project.app.models.message import Message
-from project.app.schemas.conversation import ConversationCreate
+from ..models.conversation import Conversation
+from ..models.message import Message
+from ..schemas.conversation import ConversationCreate
 
 
 class ConversationRepository:

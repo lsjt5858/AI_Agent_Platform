@@ -10,10 +10,10 @@ from typing import List
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from project.app.database import get_db
-from project.app.schemas.message import MessageCreate, MessageResponse
-from project.app.schemas.response import APIResponse
-from project.app.services.message import (
+from ..database import get_db
+from ..schemas.message import MessageCreate, MessageResponse
+from ..schemas.response import APIResponse
+from ..services.message import (
     ConversationNotFoundError,
     MessageService,
     get_message_service,

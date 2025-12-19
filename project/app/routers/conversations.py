@@ -10,14 +10,14 @@ from typing import List
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from project.app.database import get_db
-from project.app.schemas.conversation import (
+from ..database import get_db
+from ..schemas.conversation import (
     ConversationCreate,
     ConversationDetail,
     ConversationResponse,
 )
-from project.app.schemas.response import APIResponse
-from project.app.services.conversation import (
+from ..schemas.response import APIResponse
+from ..services.conversation import (
     AgentNotFoundError,
     ConversationNotFoundError,
     ConversationService,

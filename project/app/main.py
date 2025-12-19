@@ -3,6 +3,9 @@ FastAPI application entry point.
 Configures CORS, exception handlers, and static file serving.
 """
 
+import os
+from pathlib import Path
+
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, FileResponse
@@ -12,6 +15,10 @@ from .config import get_settings
 from .routers import agents_router, conversations_router, messages_router
 
 settings = get_settings()
+
+# Get the project root directory (parent of app directory)
+PROJECT_ROOT = Path(__file__).parent.parent
+STATIC_DIR = PROJECT_ROOT / "static"
 
 app = FastAPI(
     title=settings.app_name,
@@ -161,13 +168,17 @@ app.include_router(conversations_router, prefix="/api")
 app.include_router(messages_router, prefix="/api")
 
 # Mount static files directory
-app.mount("/static", StaticFiles(directory="project/static"), name="static")
+if STATIC_DIR.exists():
+    app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
 
 
 @app.get("/")
 async def root():
     """Root endpoint - serve frontend."""
-    return FileResponse("project/static/index.html")
+    index_file = STATIC_DIR / "index.html"
+    if index_file.exists():
+        return FileResponse(str(index_file))
+    return {"message": "Welcome to AI Agent Platform"}
 
 
 @app.get("/health")

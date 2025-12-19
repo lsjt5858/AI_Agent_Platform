@@ -11,10 +11,10 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from pydantic import ValidationError as PydanticValidationError
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from project.app.database import get_db
-from project.app.schemas.agent import AgentCreate, AgentResponse, AgentUpdate
-from project.app.schemas.response import APIResponse
-from project.app.services.agent import AgentNotFoundError, AgentService, get_agent_service
+from ..database import get_db
+from ..schemas.agent import AgentCreate, AgentResponse, AgentUpdate
+from ..schemas.response import APIResponse
+from ..services.agent import AgentNotFoundError, AgentService, get_agent_service
 
 router = APIRouter(prefix="/agents", tags=["agents"])
 

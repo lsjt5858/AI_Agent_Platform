@@ -10,7 +10,7 @@ from typing import Any, Optional
 
 import httpx
 
-from project.app.config import get_settings
+from ..config import get_settings
 
 logger = logging.getLogger(__name__)
 

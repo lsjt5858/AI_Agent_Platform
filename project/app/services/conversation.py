@@ -9,10 +9,10 @@ from typing import List, Optional
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from project.app.models.conversation import Conversation
-from project.app.repositories.agent import AgentRepository
-from project.app.repositories.conversation import ConversationRepository
-from project.app.schemas.conversation import ConversationCreate, ConversationResponse
+from ..models.conversation import Conversation
+from ..repositories.agent import AgentRepository
+from ..repositories.conversation import ConversationRepository
+from ..schemas.conversation import ConversationCreate, ConversationResponse
 
 
 class ConversationNotFoundError(Exception):

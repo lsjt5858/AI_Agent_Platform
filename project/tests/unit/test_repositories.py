@@ -6,14 +6,14 @@ Tests basic CRUD operations for Agent, Conversation, and Message repositories.
 import pytest
 import pytest_asyncio
 
-from project.app.models.agent import Agent
-from project.app.models.conversation import Conversation
-from project.app.models.message import Message
-from project.app.repositories.agent import AgentRepository
-from project.app.repositories.conversation import ConversationRepository
-from project.app.repositories.message import MessageRepository
-from project.app.schemas.agent import AgentCreate, AgentUpdate
-from project.app.schemas.conversation import ConversationCreate
+from app.models.agent import Agent
+from app.models.conversation import Conversation
+from app.models.message import Message
+from app.repositories.agent import AgentRepository
+from app.repositories.conversation import ConversationRepository
+from app.repositories.message import MessageRepository
+from app.schemas.agent import AgentCreate, AgentUpdate
+from app.schemas.conversation import ConversationCreate
 
 
 class TestAgentRepository:

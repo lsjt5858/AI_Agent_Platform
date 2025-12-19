@@ -8,8 +8,8 @@ from typing import List, Optional
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from project.app.models.agent import Agent
-from project.app.schemas.agent import AgentCreate, AgentUpdate
+from ..models.agent import Agent
+from ..schemas.agent import AgentCreate, AgentUpdate
 
 
 class AgentRepository:
