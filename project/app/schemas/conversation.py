@@ -9,18 +9,18 @@ from pydantic import BaseModel, Field
 
 
 class ConversationCreate(BaseModel):
-    """Schema for creating a new Conversation."""
-    
+    """创建新对话的模式。"""
+
     title: Optional[str] = Field(
         default=None,
         max_length=200,
-        description="Optional conversation title"
+        description="可选的对话标题"
     )
 
 
 class ConversationResponse(BaseModel):
-    """Schema for Conversation API response."""
-    
+    """对话API响应的模式。"""
+
     id: int
     agent_id: int
     title: Optional[str]
@@ -28,15 +28,15 @@ class ConversationResponse(BaseModel):
     updated_at: datetime
     message_count: int = Field(
         default=0,
-        description="Number of messages in the conversation"
+        description="对话中的消息数量"
     )
 
     model_config = {"from_attributes": True}
 
 
 class ConversationDetail(BaseModel):
-    """Schema for detailed Conversation response with messages."""
-    
+    """包含消息的详细对话响应模式。"""
+
     id: int
     agent_id: int
     title: Optional[str]

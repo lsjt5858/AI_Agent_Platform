@@ -72,19 +72,19 @@ def format_messages_for_llm(
     return formatted
 
 
-def parse_llm_response(response_data: dict[str, Any]) -> str:
+def parse_llm_response(response_data: dict[str, Any]) -> tuple[str, dict[str, int]]:
     """
-    Parse LLM API response and extract assistant message content.
-    
+    Parse LLM API response and extract assistant message content and token usage.
+
     Args:
         response_data: Raw response from LLM API
-        
+
     Returns:
-        Extracted assistant message content
-        
+        Tuple of (assistant_message_content, token_usage_dict)
+
     Raises:
         LLMAPIError: If response format is invalid
-        
+
     Requirements: 3.6
     """
     try:
@@ -94,18 +94,26 @@ def parse_llm_response(response_data: dict[str, Any]) -> str:
                 "Invalid LLM response: no choices returned",
                 details={"response": response_data}
             )
-        
+
         message = choices[0].get("message", {})
         content = message.get("content")
-        
+
         if content is None:
             raise LLMAPIError(
                 "Invalid LLM response: no content in message",
                 details={"response": response_data}
             )
-        
-        return content
-        
+
+        # Extract token usage information
+        usage = response_data.get("usage", {})
+        token_usage = {
+            "prompt_tokens": usage.get("prompt_tokens", 0),
+            "completion_tokens": usage.get("completion_tokens", 0),
+            "total_tokens": usage.get("total_tokens", 0)
+        }
+
+        return content, token_usage
+
     except (KeyError, IndexError, TypeError) as e:
         raise LLMAPIError(
             f"Failed to parse LLM response: {str(e)}",
@@ -250,35 +258,35 @@ class LLMService:
         system_prompt: str,
         temperature: float = 0.7,
         max_tokens: Optional[int] = None
-    ) -> str:
+    ) -> tuple[str, dict[str, int]]:
         """
-        Send chat request to LLM and get response.
-        
+        Send chat request to LLM and get response with token usage.
+
         Handles the complete flow:
         1. Format messages with system prompt
         2. Make async API request with retry logic
-        3. Parse and return response content
-        
+        3. Parse and return response content with token usage
+
         Args:
             messages: List of conversation messages with 'role' and 'content'
             system_prompt: System prompt defining agent behavior
             temperature: Sampling temperature (0-2, default 0.7)
             max_tokens: Maximum tokens in response (optional)
-            
+
         Returns:
-            Assistant's response content
-            
+            Tuple of (assistant's response content, token_usage_dict)
+
         Raises:
             LLMTimeoutError: If request times out after 30 seconds
             LLMAPIError: If API returns an error
-            
+
         Requirements: 3.1, 3.2, 3.3, 3.4
         """
         # Format messages for LLM API (Requirements: 3.5)
         formatted_messages = format_messages_for_llm(messages, system_prompt)
-        
+
         last_error: Optional[Exception] = None
-        
+
         # Retry logic for transient errors
         for attempt in range(self.max_retries + 1):
             try:
@@ -288,7 +296,7 @@ class LLMService:
                     temperature,
                     max_tokens
                 )
-                
+
                 # Parse response (Requirements: 3.6)
                 return parse_llm_response(response_data)
                 

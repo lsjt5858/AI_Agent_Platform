@@ -10,36 +10,36 @@ T = TypeVar("T")
 
 
 class ErrorDetail(BaseModel):
-    """Schema for error details."""
-    
-    code: str = Field(description="Error code")
-    message: str = Field(description="Human-readable error message")
+    """错误详情的模式。"""
+
+    code: str = Field(description="错误代码")
+    message: str = Field(description="人类可读的错误消息")
     details: Optional[dict] = Field(
         default=None,
-        description="Additional error details"
+        description="额外的错误详情"
     )
 
 
 class APIResponse(BaseModel, Generic[T]):
     """
-    Generic API response wrapper.
-    
-    Provides consistent response structure for all API endpoints.
+    通用API响应包装器。
+
+    为所有API端点提供一致的响应结构。
     """
-    
-    success: bool = Field(description="Whether the request was successful")
+
+    success: bool = Field(description="请求是否成功")
     data: Optional[T] = Field(
         default=None,
-        description="Response data (present on success)"
+        description="响应数据（成功时存在）"
     )
     error: Optional[ErrorDetail] = Field(
         default=None,
-        description="Error information (present on failure)"
+        description="错误信息（失败时存在）"
     )
 
     @classmethod
     def ok(cls, data: T) -> "APIResponse[T]":
-        """Create a successful response."""
+        """创建成功的响应。"""
         return cls(success=True, data=data, error=None)
 
     @classmethod
@@ -49,7 +49,7 @@ class APIResponse(BaseModel, Generic[T]):
         message: str,
         details: Optional[dict] = None
     ) -> "APIResponse[None]":
-        """Create a failure response."""
+        """创建失败的响应。"""
         return cls(
             success=False,
             data=None,

@@ -14,6 +14,7 @@ from ..database import Base
 if TYPE_CHECKING:
     from .agent import Agent
     from .message import Message
+    from .token_usage import TokenUsage
 
 
 class Conversation(Base):
@@ -62,6 +63,13 @@ class Conversation(Base):
         cascade="all, delete-orphan",
         lazy="selectin",
         order_by="Message.created_at"
+    )
+
+    # Relationship: Conversation has many TokenUsage records (cascade delete)
+    token_usage: Mapped[List["TokenUsage"]] = relationship(
+        "TokenUsage",
+        back_populates="conversation",
+        cascade="all, delete-orphan"
     )
 
     def __repr__(self) -> str:

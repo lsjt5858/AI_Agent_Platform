@@ -13,6 +13,7 @@ from ..models.message import Message
 from ..repositories.agent import AgentRepository
 from ..repositories.conversation import ConversationRepository
 from ..repositories.message import MessageRepository
+from ..repositories.token_usage import TokenUsageRepository
 from .llm import LLMService, get_llm_service
 
 
@@ -33,13 +34,13 @@ class MessageService:
     """
 
     def __init__(
-        self, 
+        self,
         session: AsyncSession,
         llm_service: LLMService | None = None
     ):
         """
         Initialize MessageService with database session and LLM service.
-        
+
         Args:
             session: AsyncSession for database operations
             llm_service: Optional LLMService instance (defaults to singleton)
@@ -47,6 +48,7 @@ class MessageService:
         self.message_repository = MessageRepository(session)
         self.conversation_repository = ConversationRepository(session)
         self.agent_repository = AgentRepository(session)
+        self.token_usage_repository = TokenUsageRepository(session)
         self.llm_service = llm_service or get_llm_service()
         self.session = session
 
@@ -117,20 +119,29 @@ class MessageService:
         message_context = self._build_message_context(messages)
         
         # Call LLM service
-        ai_response = await self.llm_service.chat(
+        ai_response, token_usage = await self.llm_service.chat(
             messages=message_context,
             system_prompt=system_prompt
         )
-        
+
+        # Save token usage information
+        await self.token_usage_repository.create(
+            conversation_id=conversation_id,
+            model=self.llm_service.model,
+            prompt_tokens=token_usage["prompt_tokens"],
+            completion_tokens=token_usage["completion_tokens"],
+            total_tokens=token_usage["total_tokens"]
+        )
+
         # Save assistant message
         assistant_message = await self.message_repository.create(
             conversation_id=conversation_id,
             role="assistant",
             content=ai_response
         )
-        
+
         await self.session.commit()
-        
+
         return user_message, assistant_message
 
     async def get_messages(self, conversation_id: int) -> List[Message]:

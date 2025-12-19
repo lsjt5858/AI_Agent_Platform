@@ -4,6 +4,7 @@ Configures CORS, exception handlers, and static file serving.
 """
 
 import os
+from contextlib import asynccontextmanager
 from pathlib import Path
 
 from fastapi import FastAPI, Request
@@ -12,6 +13,7 @@ from fastapi.responses import JSONResponse, FileResponse
 from fastapi.staticfiles import StaticFiles
 
 from .config import get_settings
+from .database import init_db
 from .routers import agents_router, conversations_router, messages_router
 
 settings = get_settings()
@@ -20,12 +22,23 @@ settings = get_settings()
 PROJECT_ROOT = Path(__file__).parent.parent
 STATIC_DIR = PROJECT_ROOT / "static"
 
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Manage application lifespan events."""
+    # Startup
+    await init_db()
+    yield
+    # Shutdown (if needed)
+
+
 app = FastAPI(
     title=settings.app_name,
     description="AI Agent 对话平台 - 创建和管理多个 AI 智能体",
     version="1.0.0",
     docs_url="/docs",
     redoc_url="/redoc",
+    lifespan=lifespan,
 )
 
 # Configure CORS middleware
@@ -174,16 +187,16 @@ if STATIC_DIR.exists():
 
 @app.get("/")
 async def root():
-    """Root endpoint - serve frontend."""
+    """根路径 - 提供前端页面。"""
     index_file = STATIC_DIR / "index.html"
     if index_file.exists():
         return FileResponse(str(index_file))
-    return {"message": "Welcome to AI Agent Platform"}
+    return {"message": "欢迎使用 AI Agent 对话平台"}
 
 
 @app.get("/health")
 async def health_check():
-    """Health check endpoint."""
+    """健康检查端点。"""
     return {
         "success": True,
         "data": {"status": "healthy"},
