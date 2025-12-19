@@ -138,7 +138,7 @@
     - **Property 10: JSON Response Structure**
     - **Validates: Requirements 5.2, 5.4, 5.5**
 
-- [ ] 9. Checkpoint - 确保后端 API 测试通过
+- [x] 9. Checkpoint - 确保后端 API 测试通过
   - Ensure all tests pass, ask the user if questions arise.
 
 - [ ] 10. 前端界面实现
