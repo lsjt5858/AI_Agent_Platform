@@ -78,7 +78,7 @@
     - **Property 5: Conversation Message Ordering**
     - **Validates: Requirements 1.1, 1.3, 1.4, 2.3**
 
-- [ ] 5. Checkpoint - 确保数据层测试通过
+- [x] 5. Checkpoint - 确保数据层测试通过
   - Ensure all tests pass, ask the user if questions arise.
 
 - [ ] 6. LLM Service 实现
