@@ -2,18 +2,18 @@
 
 ## AI Agent Platform - 实现任务列表
 
-- [ ] 1. 项目初始化和基础配置
-  - [ ] 1.1 创建项目目录结构
+- [x] 1. 项目初始化和基础配置
+  - [x] 1.1 创建项目目录结构
     - 创建 `project/app/` 目录及子目录：`models/`, `schemas/`, `services/`, `routers/`, `repositories/`
     - 创建 `project/tests/` 目录及子目录：`unit/`, `integration/`, `properties/`
     - 创建 `project/static/` 目录用于前端文件
     - 在各目录创建 `__init__.py` 文件
     - _Requirements: 5.1_
-  - [ ] 1.2 配置管理模块
+  - [x] 1.2 配置管理模块
     - 创建 `project/app/config.py` 使用 pydantic-settings 管理配置
     - 配置 LLM API、数据库连接等环境变量
     - _Requirements: 3.2, 4.4_
-  - [ ] 1.3 创建 FastAPI 应用入口
+  - [x] 1.3 创建 FastAPI 应用入口
     - 创建 `project/app/main.py` 主应用文件
     - 配置 CORS 中间件
     - 配置全局异常处理器

@@ -1,50 +1,27 @@
-# FastAPI学习项目依赖
-# 核心框架
-fastapi>=0.104.1
+# FastAPI and Web
+fastapi>=0.104.0
 uvicorn[standard]>=0.24.0
+python-multipart>=0.0.6
 
-# 数据验证和序列化
+# Database
+sqlalchemy>=2.0.0
+aiosqlite>=0.19.0
+
+# HTTP Client (for LLM API)
+httpx>=0.25.0
+
+# Data Validation
 pydantic>=2.5.0
 pydantic-settings>=2.1.0
 
-# 数据库相关 (Week 3使用)
-sqlalchemy>=2.0.23
-databases[postgresql]>=0.8.0
-asyncpg>=0.29.0  # PostgreSQL异步驱动
-alembic>=1.13.1  # 数据库迁移
-
-# 认证和安全 (Week 4使用)
-python-jose[cryptography]>=3.3.0  # JWT处理
-passlib[bcrypt]>=1.7.4  # 密码哈希
-python-multipart>=0.0.6  # 表单数据处理
-
-# 后台任务 (Week 5使用)
-celery>=5.3.4
-redis>=5.0.1
-
-# WebSocket支持 (Week 5使用)
-websockets>=12.0
-
-# 测试相关 (Week 6使用)
-pytest>=7.4.3
-pytest-asyncio>=0.21.1
-httpx>=0.25.2  # 用于测试异步API
-faker>=20.1.0  # 生成测试数据
-
-# 开发工具
-black>=23.11.0  # 代码格式化
-flake8>=6.1.0  # 代码检查
-isort>=5.12.0  # import排序
-mypy>=1.7.1  # 类型检查
-
-# 性能监控 (Week 6使用)
-sentry-sdk[fastapi]>=1.38.0
-
-# CORS支持 (Week 1可能需要)
+# Environment
 python-dotenv>=1.0.0
 
-# 可选：HTTP客户端测试工具
-httpie>=3.2.2
+# Testing
+pytest>=7.4.0
+pytest-asyncio>=0.21.0
+hypothesis>=6.92.0
 
-# 可选：API文档增强
-fastapi-users>=12.1.2  # 如果需要用户管理功能
+# Development
+black>=23.0.0
+isort>=5.12.0
