@@ -114,22 +114,22 @@
     - **Property 7: Message Context Accumulation**
     - **Validates: Requirements 2.6, 3.1**
 
-- [ ] 8. API Router 实现
-  - [ ] 8.1 实现 Agent Router
+- [x] 8. API Router 实现
+  - [x] 8.1 实现 Agent Router
     - 创建 `project/app/routers/agents.py`
     - 实现 POST, GET, PUT, DELETE 端点
     - 添加依赖注入
     - _Requirements: 1.1, 1.2, 1.3, 1.4, 1.5, 5.1_
-  - [ ] 8.2 实现 Conversation Router
+  - [x] 8.2 实现 Conversation Router
     - 创建 `project/app/routers/conversations.py`
     - 实现对话 CRUD 端点
     - _Requirements: 2.1, 2.4, 2.5, 5.1_
-  - [ ] 8.3 实现 Message Router
+  - [x] 8.3 实现 Message Router
     - 创建 `project/app/routers/messages.py`
     - 实现消息发送和历史查询端点
     - 创建 `project/app/routers/__init__.py` 导出所有 routers
     - _Requirements: 2.2, 2.3, 5.1_
-  - [ ] 8.4 注册路由到主应用
+  - [x] 8.4 注册路由到主应用
     - 在 main.py 中注册所有路由
     - 配置路由前缀 `/api`
     - _Requirements: 5.1, 5.3_

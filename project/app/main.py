@@ -9,6 +9,7 @@ from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
 
 from .config import get_settings
+from .routers import agents_router, conversations_router, messages_router
 
 settings = get_settings()
 
@@ -153,6 +154,11 @@ async def database_exception_handler(request: Request, exc: DatabaseError):
         },
     )
 
+
+# Register API routers with /api prefix
+app.include_router(agents_router, prefix="/api")
+app.include_router(conversations_router, prefix="/api")
+app.include_router(messages_router, prefix="/api")
 
 # Mount static files directory
 app.mount("/static", StaticFiles(directory="project/static"), name="static")
