@@ -5,7 +5,7 @@ Configures CORS, exception handlers, and static file serving.
 
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, FileResponse
 from fastapi.staticfiles import StaticFiles
 
 from .config import get_settings
@@ -166,16 +166,8 @@ app.mount("/static", StaticFiles(directory="project/static"), name="static")
 
 @app.get("/")
 async def root():
-    """Root endpoint - redirect to docs or serve frontend."""
-    return {
-        "success": True,
-        "data": {
-            "message": f"Welcome to {settings.app_name}",
-            "docs": "/docs",
-            "version": "1.0.0",
-        },
-        "error": None,
-    }
+    """Root endpoint - serve frontend."""
+    return FileResponse("project/static/index.html")
 
 
 @app.get("/health")

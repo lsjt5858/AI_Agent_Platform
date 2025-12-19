@@ -141,23 +141,23 @@
 - [x] 9. Checkpoint - 确保后端 API 测试通过
   - Ensure all tests pass, ask the user if questions arise.
 
-- [ ] 10. 前端界面实现
-  - [ ] 10.1 创建基础 HTML 结构
+- [x] 10. 前端界面实现
+  - [x] 10.1 创建基础 HTML 结构
     - 创建 `project/static/index.html` 主页面
     - 创建 `project/static/style.css` 样式文件
     - 实现响应式布局
     - _Requirements: 6.1, 6.6_
-  - [ ] 10.2 实现 Agent 列表和创建功能
+  - [x] 10.2 实现 Agent 列表和创建功能
     - 实现 Agent 列表展示
     - 实现创建 Agent 表单
     - 使用 Fetch API 调用后端
     - _Requirements: 6.1, 6.5_
-  - [ ] 10.3 实现对话界面
+  - [x] 10.3 实现对话界面
     - 实现消息列表展示
     - 实现消息发送功能
     - 区分用户和 AI 消息样式
     - _Requirements: 6.2, 6.3, 6.4_
-  - [ ] 10.4 实现 JavaScript 交互逻辑
+  - [x] 10.4 实现 JavaScript 交互逻辑
     - 创建 `project/static/app.js`
     - 实现 API 调用封装
     - 实现页面状态管理

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Agent 对话平台</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar: Agent List -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1>🤖 AI Agents</h1>
+                <button id="btn-new-agent" class="btn btn-primary">+ 新建 Agent</button>
+            </div>
+            <div class="agent-list" id="agent-list">
+                <!-- Agent items will be rendered here -->
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Welcome Screen (shown when no agent selected) -->
+            <div class="welcome-screen" id="welcome-screen">
+                <div class="welcome-content">
+                    <h2>👋 欢迎使用 AI Agent 平台</h2>
+                    <p>选择左侧的 Agent 开始对话，或创建一个新的 Agent</p>
+                </div>
+            </div>
+
+            <!-- Chat Interface (hidden by default) -->
+            <div class="chat-container" id="chat-container" style="display: none;">
+                <!-- Chat Header -->
+                <div class="chat-header">
+                    <div class="agent-info">
+                        <h2 id="current-agent-name">Agent Name</h2>
+                        <p id="current-agent-description">Agent description</p>
+                    </div>
+                    <div class="chat-actions">
+                        <button id="btn-new-conversation" class="btn btn-secondary">新对话</button>
+                        <button id="btn-edit-agent" class="btn btn-secondary">编辑</button>
+                        <button id="btn-delete-agent" class="btn btn-danger">删除</button>
+                    </div>
+                </div>
+
+                <!-- Conversation List -->
+                <div class="conversation-sidebar" id="conversation-sidebar">
+                    <h3>对话历史</h3>
+                    <div class="conversation-list" id="conversation-list">
+                        <!-- Conversation items will be rendered here -->
+                    </div>
+                </div>
+
+                <!-- Messages Area -->
+                <div class="messages-area">
+                    <div class="messages-list" id="messages-list">
+                        <!-- Messages will be rendered here -->
+                    </div>
+                    
+                    <!-- Message Input -->
+                    <div class="message-input-container">
+                        <form id="message-form">
+                            <textarea 
+                                id="message-input" 
+                                placeholder="输入消息..." 
+                                rows="1"
+                                disabled
+                            ></textarea>
+                            <button type="submit" class="btn btn-primary" id="btn-send" disabled>
+                                发送
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal: Create/Edit Agent -->
+    <div class="modal" id="agent-modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">创建新 Agent</h3>
+                <button class="modal-close" id="modal-close">&times;</button>
+            </div>
+            <form id="agent-form">
+                <div class="form-group">
+                    <label for="agent-name">名称 *</label>
+                    <input 
+                        type="text" 
+                        id="agent-name" 
+                        name="name" 
+                        required 
+                        placeholder="例如：代码助手"
+                    >
+                </div>
+                <div class="form-group">
+                    <label for="agent-system-prompt">系统提示词</label>
+                    <textarea 
+                        id="agent-system-prompt" 
+                        name="system_prompt" 
+                        rows="4"
+                        placeholder="定义 Agent 的角色和行为..."
+                    >You are a helpful assistant.</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="agent-description">描述</label>
+                    <input 
+                        type="text" 
+                        id="agent-description" 
+                        name="description" 
+                        placeholder="简短描述这个 Agent 的用途"
+                    >
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="btn-cancel">取消</button>
+                    <button type="submit" class="btn btn-primary" id="btn-save">保存</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loading-overlay" style="display: none;">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
