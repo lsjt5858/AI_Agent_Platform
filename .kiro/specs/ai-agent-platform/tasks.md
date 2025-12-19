@@ -38,17 +38,17 @@
     - **Property 6: Conversation Deletion Cascade**
     - **Validates: Requirements 1.5, 2.5**
 
-- [ ] 3. Pydantic Schemas 定义
-  - [ ] 3.1 创建 Agent 相关 Schemas
+- [x] 3. Pydantic Schemas 定义
+  - [x] 3.1 创建 Agent 相关 Schemas
     - 创建 `project/app/schemas/agent.py`
     - 实现 AgentCreate, AgentUpdate, AgentResponse
     - 添加字段验证（name 非空，min_length=1）
     - _Requirements: 1.1, 1.6_
-  - [ ] 3.2 创建 Conversation 和 Message Schemas
+  - [x] 3.2 创建 Conversation 和 Message Schemas
     - 创建 `project/app/schemas/conversation.py`
     - 创建 `project/app/schemas/message.py`
     - _Requirements: 2.1, 2.2_
-  - [ ] 3.3 创建统一响应格式
+  - [x] 3.3 创建统一响应格式
     - 创建 `project/app/schemas/response.py`
     - 实现 APIResponse 泛型类
     - 创建 `project/app/schemas/__init__.py` 导出所有 schemas
