@@ -81,8 +81,8 @@
 - [x] 5. Checkpoint - 确保数据层测试通过
   - Ensure all tests pass, ask the user if questions arise.
 
-- [ ] 6. LLM Service 实现
-  - [ ] 6.1 创建 LLM 服务
+- [x] 6. LLM Service 实现
+  - [x] 6.1 创建 LLM 服务
     - 创建 `project/app/services/llm.py`
     - 实现消息格式化函数（转换为 LLM API 格式）
     - 实现响应解析函数
