@@ -94,17 +94,17 @@
     - **Property 8: LLM Message Serialization Round-Trip**
     - **Validates: Requirements 3.5, 3.6**
 
-- [ ] 7. Service 层实现
-  - [ ] 7.1 实现 AgentService
+- [x] 7. Service 层实现
+  - [x] 7.1 实现 AgentService
     - 创建 `project/app/services/agent.py`
     - 封装 Repository 调用
     - 添加业务逻辑验证
     - _Requirements: 1.1, 1.2, 1.3, 1.4, 1.5_
-  - [ ] 7.2 实现 ConversationService
+  - [x] 7.2 实现 ConversationService
     - 创建 `project/app/services/conversation.py`
     - 封装对话管理逻辑
     - _Requirements: 2.1, 2.4, 2.5_
-  - [ ] 7.3 实现 MessageService
+  - [x] 7.3 实现 MessageService
     - 创建 `project/app/services/message.py`
     - 集成 LLM 服务
     - 实现消息上下文构建
