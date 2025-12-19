@@ -57,16 +57,16 @@
     - **Property 4: Empty Name Rejection**
     - **Validates: Requirements 1.6**
 
-- [ ] 4. Repository 层实现
-  - [ ] 4.1 实现 AgentRepository
+- [x] 4. Repository 层实现
+  - [x] 4.1 实现 AgentRepository
     - 创建 `project/app/repositories/agent.py`
     - 实现 create, get_all, get_by_id, update, delete 方法
     - _Requirements: 1.1, 1.2, 1.3, 1.4, 1.5_
-  - [ ] 4.2 实现 ConversationRepository
+  - [x] 4.2 实现 ConversationRepository
     - 创建 `project/app/repositories/conversation.py`
     - 实现 create, get_by_agent, get_by_id, delete 方法
     - _Requirements: 2.1, 2.4, 2.5_
-  - [ ] 4.3 实现 MessageRepository
+  - [x] 4.3 实现 MessageRepository
     - 创建 `project/app/repositories/message.py`
     - 实现 create, get_by_conversation 方法
     - 确保消息按时间排序返回
