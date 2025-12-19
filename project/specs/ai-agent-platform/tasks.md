@@ -1,0 +1,178 @@
+# Implementation Plan
+
+## AI Agent Platform - 实现任务列表
+
+- [ ] 1. 项目初始化和基础配置
+  - [ ] 1.1 创建项目目录结构
+    - 创建 `project/app/` 目录及子目录：`models/`, `schemas/`, `services/`, `routers/`, `repositories/`
+    - 创建 `project/tests/` 目录及子目录：`unit/`, `integration/`, `properties/`
+    - 创建 `project/static/` 目录用于前端文件
+    - 在各目录创建 `__init__.py` 文件
+    - _Requirements: 5.1_
+  - [ ] 1.2 配置管理模块
+    - 创建 `project/app/config.py` 使用 pydantic-settings 管理配置
+    - 配置 LLM API、数据库连接等环境变量
+    - _Requirements: 3.2, 4.4_
+  - [ ] 1.3 创建 FastAPI 应用入口
+    - 创建 `project/app/main.py` 主应用文件
+    - 配置 CORS 中间件
+    - 配置全局异常处理器
+    - 挂载静态文件目录
+    - _Requirements: 5.3, 5.6_
+
+- [ ] 2. 数据库模型和连接
+  - [ ] 2.1 创建数据库连接配置
+    - 创建 `project/app/database.py` 异步数据库引擎
+    - 配置 SQLAlchemy async session
+    - 实现数据库初始化函数
+    - _Requirements: 4.1, 4.4_
+  - [ ] 2.2 实现 SQLAlchemy 模型
+    - 创建 `project/app/models/agent.py` Agent 模型
+    - 创建 `project/app/models/conversation.py` Conversation 模型
+    - 创建 `project/app/models/message.py` Message 模型
+    - 创建 `project/app/models/__init__.py` 导出所有模型
+    - 配置外键关系和级联删除
+    - _Requirements: 4.1, 4.2, 1.5, 2.5_
+  - [ ]* 2.3 编写数据模型属性测试
+    - **Property 3: Agent Deletion Cascade**
+    - **Property 6: Conversation Deletion Cascade**
+    - **Validates: Requirements 1.5, 2.5**
+
+- [ ] 3. Pydantic Schemas 定义
+  - [ ] 3.1 创建 Agent 相关 Schemas
+    - 创建 `project/app/schemas/agent.py`
+    - 实现 AgentCreate, AgentUpdate, AgentResponse
+    - 添加字段验证（name 非空，min_length=1）
+    - _Requirements: 1.1, 1.6_
+  - [ ] 3.2 创建 Conversation 和 Message Schemas
+    - 创建 `project/app/schemas/conversation.py`
+    - 创建 `project/app/schemas/message.py`
+    - _Requirements: 2.1, 2.2_
+  - [ ] 3.3 创建统一响应格式
+    - 创建 `project/app/schemas/response.py`
+    - 实现 APIResponse 泛型类
+    - 创建 `project/app/schemas/__init__.py` 导出所有 schemas
+    - _Requirements: 5.2_
+  - [ ]* 3.4 编写 Schema 验证属性测试
+    - **Property 4: Empty Name Rejection**
+    - **Validates: Requirements 1.6**
+
+- [ ] 4. Repository 层实现
+  - [ ] 4.1 实现 AgentRepository
+    - 创建 `project/app/repositories/agent.py`
+    - 实现 create, get_all, get_by_id, update, delete 方法
+    - _Requirements: 1.1, 1.2, 1.3, 1.4, 1.5_
+  - [ ] 4.2 实现 ConversationRepository
+    - 创建 `project/app/repositories/conversation.py`
+    - 实现 create, get_by_agent, get_by_id, delete 方法
+    - _Requirements: 2.1, 2.4, 2.5_
+  - [ ] 4.3 实现 MessageRepository
+    - 创建 `project/app/repositories/message.py`
+    - 实现 create, get_by_conversation 方法
+    - 确保消息按时间排序返回
+    - 创建 `project/app/repositories/__init__.py` 导出所有 repositories
+    - _Requirements: 2.2, 2.3_
+  - [ ]* 4.4 编写 Repository 属性测试
+    - **Property 1: Agent CRUD Round-Trip**
+    - **Property 2: Agent Update Persistence**
+    - **Property 5: Conversation Message Ordering**
+    - **Validates: Requirements 1.1, 1.3, 1.4, 2.3**
+
+- [ ] 5. Checkpoint - 确保数据层测试通过
+  - Ensure all tests pass, ask the user if questions arise.
+
+- [ ] 6. LLM Service 实现
+  - [ ] 6.1 创建 LLM 服务
+    - 创建 `project/app/services/llm.py`
+    - 实现消息格式化函数（转换为 LLM API 格式）
+    - 实现响应解析函数
+    - 使用 httpx 实现异步请求
+    - 配置 30 秒超时
+    - 实现错误处理和重试逻辑
+    - _Requirements: 3.2, 3.3, 3.4, 3.5, 3.6_
+  - [ ]* 6.2 编写 LLM 服务属性测试
+    - **Property 8: LLM Message Serialization Round-Trip**
+    - **Validates: Requirements 3.5, 3.6**
+
+- [ ] 7. Service 层实现
+  - [ ] 7.1 实现 AgentService
+    - 创建 `project/app/services/agent.py`
+    - 封装 Repository 调用
+    - 添加业务逻辑验证
+    - _Requirements: 1.1, 1.2, 1.3, 1.4, 1.5_
+  - [ ] 7.2 实现 ConversationService
+    - 创建 `project/app/services/conversation.py`
+    - 封装对话管理逻辑
+    - _Requirements: 2.1, 2.4, 2.5_
+  - [ ] 7.3 实现 MessageService
+    - 创建 `project/app/services/message.py`
+    - 集成 LLM 服务
+    - 实现消息上下文构建
+    - 创建 `project/app/services/__init__.py` 导出所有 services
+    - _Requirements: 2.2, 2.3, 2.6, 3.1_
+  - [ ]* 7.4 编写 Service 层属性测试
+    - **Property 7: Message Context Accumulation**
+    - **Validates: Requirements 2.6, 3.1**
+
+- [ ] 8. API Router 实现
+  - [ ] 8.1 实现 Agent Router
+    - 创建 `project/app/routers/agents.py`
+    - 实现 POST, GET, PUT, DELETE 端点
+    - 添加依赖注入
+    - _Requirements: 1.1, 1.2, 1.3, 1.4, 1.5, 5.1_
+  - [ ] 8.2 实现 Conversation Router
+    - 创建 `project/app/routers/conversations.py`
+    - 实现对话 CRUD 端点
+    - _Requirements: 2.1, 2.4, 2.5, 5.1_
+  - [ ] 8.3 实现 Message Router
+    - 创建 `project/app/routers/messages.py`
+    - 实现消息发送和历史查询端点
+    - 创建 `project/app/routers/__init__.py` 导出所有 routers
+    - _Requirements: 2.2, 2.3, 5.1_
+  - [ ] 8.4 注册路由到主应用
+    - 在 main.py 中注册所有路由
+    - 配置路由前缀 `/api`
+    - _Requirements: 5.1, 5.3_
+  - [ ]* 8.5 编写 API 属性测试
+    - **Property 9: Error Response Consistency**
+    - **Property 10: JSON Response Structure**
+    - **Validates: Requirements 5.2, 5.4, 5.5**
+
+- [ ] 9. Checkpoint - 确保后端 API 测试通过
+  - Ensure all tests pass, ask the user if questions arise.
+
+- [ ] 10. 前端界面实现
+  - [ ] 10.1 创建基础 HTML 结构
+    - 创建 `project/static/index.html` 主页面
+    - 创建 `project/static/style.css` 样式文件
+    - 实现响应式布局
+    - _Requirements: 6.1, 6.6_
+  - [ ] 10.2 实现 Agent 列表和创建功能
+    - 实现 Agent 列表展示
+    - 实现创建 Agent 表单
+    - 使用 Fetch API 调用后端
+    - _Requirements: 6.1, 6.5_
+  - [ ] 10.3 实现对话界面
+    - 实现消息列表展示
+    - 实现消息发送功能
+    - 区分用户和 AI 消息样式
+    - _Requirements: 6.2, 6.3, 6.4_
+  - [ ] 10.4 实现 JavaScript 交互逻辑
+    - 创建 `project/static/app.js`
+    - 实现 API 调用封装
+    - 实现页面状态管理
+    - _Requirements: 6.2, 6.3_
+
+- [ ] 11. 测试配置和集成测试
+  - [ ] 11.1 配置测试框架
+    - 创建 `project/tests/conftest.py` pytest fixtures
+    - 配置测试数据库（内存 SQLite）
+    - 配置异步测试客户端
+    - _Requirements: 4.3, 4.5_
+  - [ ]* 11.2 编写 API 集成测试
+    - 测试完整的用户流程
+    - 测试错误场景
+    - _Requirements: 5.4, 5.5_
+
+- [ ] 12. Final Checkpoint - 确保所有测试通过
+  - Ensure all tests pass, ask the user if questions arise.
