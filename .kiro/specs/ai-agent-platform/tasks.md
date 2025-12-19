@@ -20,13 +20,13 @@
     - 挂载静态文件目录
     - _Requirements: 5.3, 5.6_
 
-- [ ] 2. 数据库模型和连接
-  - [ ] 2.1 创建数据库连接配置
+- [x] 2. 数据库模型和连接
+  - [x] 2.1 创建数据库连接配置
     - 创建 `project/app/database.py` 异步数据库引擎
     - 配置 SQLAlchemy async session
     - 实现数据库初始化函数
     - _Requirements: 4.1, 4.4_
-  - [ ] 2.2 实现 SQLAlchemy 模型
+  - [x] 2.2 实现 SQLAlchemy 模型
     - 创建 `project/app/models/agent.py` Agent 模型
     - 创建 `project/app/models/conversation.py` Conversation 模型
     - 创建 `project/app/models/message.py` Message 模型
