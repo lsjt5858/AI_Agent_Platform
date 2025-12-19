@@ -163,8 +163,8 @@
     - 实现页面状态管理
     - _Requirements: 6.2, 6.3_
 
-- [ ] 11. 测试配置和集成测试
-  - [ ] 11.1 配置测试框架
+- [-] 11. 测试配置和集成测试
+  - [x] 11.1 配置测试框架
     - 创建 `project/tests/conftest.py` pytest fixtures
     - 配置测试数据库（内存 SQLite）
     - 配置异步测试客户端
