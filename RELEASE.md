@@ -126,12 +126,13 @@ pip install -r requirements.txt
 cp .env.example .env
 # 编辑 .env，填入 LLM_API_KEY
 
-# 5. 启动服务
+# 5. 启动服务 AI_Agent_Platform/project[必须在该路径下]
+uvicorn app.main:app --reload --host 127.0.0.1 --port 8008
 uvicorn app.main:app --reload
 
 # 6. 访问应用
-# Web 界面: http://localhost:8000
-# API 文档: http://localhost:8000/docs
+# Web 界面: http://localhost:8008
+# API 文档: http://localhost:8008/docs
 ```
 
 ---
